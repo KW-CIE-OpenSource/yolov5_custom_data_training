@@ -1,0 +1,25 @@
+1. repository에서는 직접 획득한 이미지들을 초상권의 사유로 업로드하지 않았습니다.
+2. 직접 획득한 이미지들의 위치는 images 폴더입니다.
+
+
+학습 방법
+1. google colab에서 .ipynb 파일 생성
+2. /content/drive 경로로 드라이브 마운트
+from google.colab import drive
+drive.mount('/content/drive')
+3. yolov5 라이브러리 클론
+!git clone https://github.com/ultralytics/yolov5
+4. yolov5 클론 경로로 이동
+%cd /content/yolov5
+5. 해당 경로에서 requirements.txt install 진행
+!pip install -r requirements.txt
+6. 학습 진행
+!python train.py --data /content/drive/MyDrive/OpenSource_FH_Posture_img_labeling/data.yaml --cfg /content/yolov5/models/yolov5s.yaml --weights yolov5s.pt --batch 8 --epochs 218 --name FH_Posture
+Logging results to runs/train/FH_Posture
+완료 시 runs/train/FH_Posture 위치에 result가 저장됨
+7. updating 
+!zip -r /content/drive/MyDrive/OpenSource_FH_Posture_img_labeling/yolov5_results.zip /content/yolov5/
+8. 검증진행
+!python val.py --data "/content/drive/MyDrive/OpenSource_FH_Posture_img_labeling/data.yaml" --img 1280 --weights "/content/yolov5/runs/train/FH_Posture/weights/best.pt"
+9. 테스트 이미지로 학습 결과 적용
+!python detect.py --img 1280 --weights "/content/yolov5/runs/train/FH_Posture/weights/best.pt" --source "/content/drive/MyDrive/OpenSource_FH_Posture_img_labeling/test.jpg"

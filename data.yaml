@@ -1,0 +1,7 @@
+train: /content/drive/MyDrive/OpenSource_FH_Posture_img_labeling/images/
+val: /content/drive/MyDrive/OpenSource_FH_Posture_img_labeling/images/
+
+nc: 1
+names: [
+'user'
+]
